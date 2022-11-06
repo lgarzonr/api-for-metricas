@@ -1,0 +1,1059 @@
+{
+	"info": {
+		"_postman_id": "b7c50d86-b4cb-4bc9-9c5d-d3bdd45873ad",
+		"name": "Culturas-Paises",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4980188"
+	},
+	"item": [
+		{
+			"name": "Asociar un pais a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises",
+						"{{pais_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Asociar un pais a una cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises",
+								"{{pais_id}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{   \r\n    \"id\":\"1\"\r\n\t\"nombre\":\"Cultura mediterranea\",\r\n\t\"descripcion\": \"La gastronomía mediterránea, además, engloba un gran número de culturas con diferentes gastronomías, todas con la misma esencia pero con sabores y elaboraciones muy diferenciadas, como por ejemplo la gastronomía española, la italiana, la provenzal francesa, la otomana, la griega, la marroquí e incluso la gastronomía magrebí, convirtiéndola en una de las gastronomías más diversas del mundo, siendo este hecho así debido a las diversas conexiones históricas, a la importancia del mar Mediterráneo en el clima, y a la economía de la región que comparte este tipo de cocina.\",\r\n    \"paises\":[\r\n        {\r\n            \"id\":\"1\"\r\n            \"nombre\":\"España\", \r\n            \"codigoPais\": \"ES\", \r\n            \"descripcion\": \"España es un país soberano transcontinental, miembro de la Unión Europea, constituido en Estado social y democrático     de  derecho y cuya forma de gobierno es la monarquía parlamentaria. Su territorio, con capital en Madrid,30​ está organizado en diecisiete comunidades autónomas, formadas a su vez por cincuenta provincias; y dos ciudades autónomas.\"\r\n        }\r\n    ]\r\n    \"productos\":[],\r\n    \"recetas\":[]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Asociar un país a una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises/{{pais_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"00000000-0000-0000-0000-000000000000",
+						"paises",
+						"{{pais_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Asociar un país a una cultura que no existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises/{{pais_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"00000000-0000-0000-0000-000000000000",
+								"paises",
+								"{{pais_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"La cultura no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Asociar un país que no existe a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El país con el id dado no fue a sociado a la cultura\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Asociar un país que no existe a una cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"El país no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un país de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises",
+						"{{pais_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un país de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises",
+								"{{pais_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\":\"1\"    \r\n    \"nombre\":\"España\", \r\n    \"codigoPais\": \"ES\", \r\n    \"descripcion\": \"España es un país soberano transcontinental, miembro de la Unión Europea, constituido en Estado social y democrático     de  derecho y cuya forma de gobierno es la monarquía parlamentaria. Su territorio, con capital en Madrid,30​ está organizado en diecisiete comunidades autónomas, formadas a su vez por cincuenta provincias; y dos ciudades autónomas.\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un país que no existe de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El país con el id dado no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un país que no existe de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"El país no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un país de una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises/{{pais_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"00000000-0000-0000-0000-000000000000",
+						"paises",
+						"{{pais_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un país de una cultura que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises/{{pais_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"00000000-0000-0000-0000-000000000000",
+								"paises",
+								"{{pais_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"La cultura no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un país no asociado a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El país con el id dado no fue encontrado\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises",
+						"{{pais_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un país no asociado a una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id_2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises",
+								"{{pais_id_2}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 412,\r\n   \"message\": \"El país no está asociado a ninguna cultura\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener los países de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener los países de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\":\"1\"\r\n        \"nombre\":\"España\", \r\n        \"codigoPais\": \"ES\", \r\n        \"descripcion\": \"España es un país soberano transcontinental, miembro de la Unión Europea, constituido en Estado social y democrático     de  derecho y cuya forma de gobierno es la monarquía parlamentaria. Su territorio, con capital en Madrid,30​ está organizado en diecisiete comunidades autónomas, formadas a su vez por cincuenta provincias; y dos ciudades autónomas.\"\r\n    },\r\n    {\r\n        \"id\":\"10\"\r\n        \"nombre\":\"Portugal\", \r\n        \"codigoPais\": \"PT\", \r\n        \"descripcion\": \"es uno de los veintisiete Estados soberanos que forman la Unión Europea, constituido como un Estado de derecho democrático. Es un país transcontinental. La mayor parte de su territorio, con capital en Lisboa, está ubicado en el suroeste de Europa, en la península ibérica. Limita al este y al norte con España, y al sur y oeste con el océano Atlántico. Comprende también los archipiélagos autónomos de las Azores y Madeira situados en el hemisferio norte del océano Atlántico.\"\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener los países de una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"00000000-0000-0000-0000-000000000000",
+						"paises"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener los países de una cultura que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"00000000-0000-0000-0000-000000000000",
+								"paises"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"La cultura no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los paises de una cultura",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"{{pais_id}}\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar los paises de una cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"{{pais_id}}\"\r\n   }\r\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{   \r\n    \"id\":\"1\"\r\n\t\"nombre\":\"Cultura mediterranea\",\r\n\t\"descripcion\": \"La gastronomía mediterránea, además, engloba un gran número de culturas con diferentes gastronomías, todas con la misma esencia pero con sabores y elaboraciones muy diferenciadas, como por ejemplo la gastronomía española, la italiana, la provenzal francesa, la otomana, la griega, la marroquí e incluso la gastronomía magrebí, convirtiéndola en una de las gastronomías más diversas del mundo, siendo este hecho así debido a las diversas conexiones históricas, a la importancia del mar Mediterráneo en el clima, y a la economía de la región que comparte este tipo de cocina.\",\r\n    \"paises\":[\r\n        {\r\n            \"id\":\"1\"\r\n            \"nombre\":\"España\", \r\n            \"codigoPais\": \"ES\", \r\n            \"descripcion\": \"España es un país soberano transcontinental, miembro de la Unión Europea, constituido en Estado social y democrático de  derecho y cuya forma de gobierno es la monarquía parlamentaria.\"\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los países que no existen de una cultura",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar los países que no existen de una cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"00000000-0000-0000-0000-000000000000\"\r\n   }\r\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"El país no fue encontrado\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los países de una cultura que no existen",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n   {\r\n       \"id\": \"{{pais_id}}\"\r\n   }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"00000000-0000-0000-0000-000000000000",
+						"paises"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar los países de una cultura que no existen",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n   {\r\n       \"id\": \"{{pais_id}}\"\r\n   }\r\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"00000000-0000-0000-0000-000000000000",
+								"paises"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"La cultura no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar un país de una cultura",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises",
+						"{{pais_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un país de una cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/{{pais_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises",
+								"{{pais_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar un país de una cultura que no existe",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises/{{pais_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"00000000-0000-0000-0000-000000000000",
+						"paises",
+						"{{pais_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un país de una cultura que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/00000000-0000-0000-0000-000000000000/paises/{{pais_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"00000000-0000-0000-0000-000000000000",
+								"paises",
+								"{{pais_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"La cultura no fue encontrada\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar un país que no existe de una cultura",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"paises",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Borrar un país que no existe de una cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/paises/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"paises",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"El país no fue encontrado\"\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}

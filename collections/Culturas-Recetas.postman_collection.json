@@ -1,0 +1,1296 @@
+{
+	"info": {
+		"_postman_id": "74683c00-a79b-4445-b570-3cf06d2355ad",
+		"name": "Culturas-Recetas",
+		"description": "Colección que permite la gestión y consulta de las recetas asociadas a una cultura",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18013353"
+	},
+	"item": [
+		{
+			"name": "Agregar una receta a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Permite agregar una receta a la lista de recursos de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Agregar una receta a una cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_id}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": {{cultura_id}},\n    \"nombre\": \"Italiana\",\n    \"descripción\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n    \"recetas\": [\n        {\n            \"id\": {{receta_id}},\n            \"nombre\": \"Focaccia\",\n            \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n            \"fotoPlato\": \"https://fotos.com/focaccia\",\n            \"videoPreparacion\": \"https://video.com/focaccia\",\n            \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar una receta a una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Permite agregar una receta a la lista de recursos de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Agregar una receta a una cultura que no existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas/{{receta_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"recetas",
+								"{{receta_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar una receta que no existe a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_invalida_id}}"
+					]
+				},
+				"description": "Permite agregar una receta a la lista de recursos de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Agregar una receta que no existe a una cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener recetas de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas"
+					]
+				},
+				"description": "Recurso que permite recuperar todas las recetas asociadas de una cultura."
+			},
+			"response": [
+				{
+					"name": "Obtener recetas de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"28a6bcd5-7f74-4d31-ac70-456d0c520544\",\n        \"nombre\": \"Focaccia\",\n        \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n        \"fotoPlato\": \"https://fotos.com/focaccia\",\n        \"videoPreparacion\": \"https://video.com/focaccia\",\n        \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener recetas de una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"recetas"
+					]
+				},
+				"description": "Recurso que permite recuperar todas las recetas asociadas de una cultura."
+			},
+			"response": [
+				{
+					"name": "Obtener recetas de una cultura que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Obtiene la información detallada de una receta que está asociada a la cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener una receta de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"28a6bcd5-7f74-4d31-ac70-456d0c520544\",\n    \"nombre\": \"Focaccia\",\n    \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focaccia\",\n    \"videoPreparacion\": \"https://video.com/focaccia\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta de una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Obtiene la información detallada de una receta que está asociada a la cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener una receta de una cultura que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas/{{receta_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"recetas",
+								"{{receta_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una recetan que no existe de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_invalida_id}}"
+					]
+				},
+				"description": "Obtiene la información detallada de una receta que está asociada a la cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener una receta de una cultura que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta que no está asociada a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no esta asociada a la cultura\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_id2}}"
+					]
+				},
+				"description": "Obtiene la información detallada de una receta que está asociada a la cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener una receta que no está asociada a una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_id2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"La receta con el id dado no esta asociada a la cultura\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar las recetas de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"{{receta_id2}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas"
+					]
+				},
+				"description": "Permite realizar actualizaciones a los recursos asociados de recetas de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Actualizar las recetas de una cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"3232\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/culturas/1234/recetas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"culturas",
+								"1234",
+								"recetas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": {{cultura_id}},\n    \"nombre\": \"Italiana\",\n    \"descripción\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n    \"recetas\": [\n        {\n            \"id\": 3232,\n            \"nombre\": \"Focaccia\",\n            \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n            \"fotoPlato\": \"https://fotos.com/focaccia\",\n            \"videoPreparacion\": \"https://video.com/focaccia\",\n            \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar las recetas de una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"{{receta_id2}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"recetas"
+					]
+				},
+				"description": "Permite realizar actualizaciones a los recursos asociados de recetas de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Actualizar las recetas de una cultura que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{receta_id2}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar las recetas de una cultura con recetas q no existen",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"{{receta_invalida_id}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas"
+					]
+				},
+				"description": "Permite realizar actualizaciones a los recursos asociados de recetas de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Actualizar las recetas de una cultura con recetas q no existen",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{receta_invalida_id}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar una receta de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_id2}}"
+					]
+				},
+				"description": "Elimina una receta de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Borrar una receta de una cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_id2}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Borrar una receta de una cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas/{{receta_id2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"recetas",
+						"{{receta_id2}}"
+					]
+				},
+				"description": "Elimina una receta de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Borrar una receta de una cultura que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/recetas/{{receta_id2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"recetas",
+								"{{receta_id2}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar una receta que no existe de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_invalida_id}}"
+					]
+				},
+				"description": "Elimina una receta de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Borrar una receta que no existe de una cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar una receta que no esta asociada a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no esta asociada a la cultura\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"recetas",
+						"{{receta_id2}}"
+					]
+				},
+				"description": "Elimina una receta de una cultura determinada"
+			},
+			"response": [
+				{
+					"name": "Borrar una receta que no existe de una cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/recetas/{{receta_id2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"recetas",
+								"{{receta_id2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"La receta con el id dado no esta asociada a la cultura\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "cultura_invalida_id",
+			"value": "aaaaaaaa-5c6c-4dcd-8c6e-eeeeeeeeeeee"
+		},
+		{
+			"key": "receta_invalida_id",
+			"value": "aaaaaaaa-5c6c-4dcd-8c6e-eeeeeeeeeeee"
+		}
+	]
+}

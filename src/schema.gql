@@ -1,0 +1,101 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RecetaEntity {
+  id: String!
+  nombre: String!
+  descripcion: String!
+  fotoPlato: String!
+  videoPreparacion: String!
+  preparacion: String!
+  cultura: CulturaEntity
+}
+
+type ProductoEntity {
+  id: String!
+  nombre: String!
+  descripcion: String!
+  historia: String!
+  tipoProducto: String!
+  cultura: [CulturaEntity!]
+}
+
+type RestauranteEntity {
+  id: String!
+  nombre: String!
+  culturas: [CulturaEntity!]
+}
+
+type CulturaEntity {
+  id: String!
+  nombre: String!
+  descripcion: String!
+  recetas: [RecetaEntity!]
+  productos: [ProductoEntity!]
+  restaurantes: [RestauranteEntity!]
+}
+
+type Query {
+  culturas: [CulturaEntity!]!
+  cultura(id: String!): CulturaEntity!
+  recetas: [RecetaEntity!]!
+  receta(id: String!): RecetaEntity!
+  productos: [ProductoEntity!]!
+  producto(id: String!): ProductoEntity!
+  findRecetasFromCultura(culturaId: String!): [RecetaEntity!]!
+  findRecetaByCulturaIdRecetaId(culturaId: String!, recetaId: String!): RecetaEntity!
+  restaurantes: [RestauranteEntity!]!
+  restaurante(id: String!): RestauranteEntity!
+  findRestauranteByCulturaIdRestauranteId(culturaId: String!, restauranteId: String!): RestauranteEntity!
+  findProductoByCulturaAndProductoId(culturaId: String!, productoId: String!): ProductoEntity!
+  findProductosFromCultura(culturaId: String!): [ProductoEntity!]!
+}
+
+type Mutation {
+  createCultura(cultura: CulturaDto!): CulturaEntity!
+  updateCultura(id: String!, cultura: CulturaDto!): CulturaEntity!
+  deleteCultura(id: String!): String!
+  createReceta(receta: RecetaDto!): RecetaEntity!
+  updateReceta(id: String!, receta: RecetaDto!): RecetaEntity!
+  deleteReceta(id: String!): String!
+  addProducto(producto: ProductoDto!): ProductoEntity!
+  updateProducto(id: String!, producto: ProductoDto!): ProductoEntity!
+  deleteProducto(id: String!): String!
+  addRecetaCultura(culturaId: String!, recetaId: String!): CulturaEntity!
+  associateRecetasCultura(culturaId: String!, recetasId: [String!]!): CulturaEntity!
+  deleteRecetaCultura(culturaId: String!, recetaId: String!): String!
+  createRestaurante(restaurante: RestauranteDto!): RestauranteEntity!
+  updateRestaurante(id: String!, restaurante: RestauranteDto!): RestauranteEntity!
+  deleteRestaurante(id: String!): String!
+  addRestauranteCultura(culturaId: String!, restauranteId: String!): CulturaEntity!
+  associateRestaurantesCultura(culturaId: String!, restaurantesId: [String!]!): CulturaEntity!
+  deleteRestauranteCultura(culturaId: String!, restauranteId: String!): String!
+  addProductoCultura(culturaId: String!, productoId: String!): CulturaEntity!
+  associateProductosToCultura(culturaId: String!, productosId: [String!]!): CulturaEntity!
+  deleteProductoFromCultura(culturaId: String!, productoId: String!): String!
+}
+
+input CulturaDto {
+  nombre: String!
+  descripcion: String!
+}
+
+input RecetaDto {
+  nombre: String!
+  descripcion: String!
+  fotoPlato: String!
+  videoPreparacion: String!
+  preparacion: String!
+}
+
+input ProductoDto {
+  nombre: String!
+  descripcion: String!
+  historia: String!
+  tipoProducto: String!
+}
+
+input RestauranteDto {
+  nombre: String!
+}

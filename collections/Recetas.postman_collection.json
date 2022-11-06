@@ -1,0 +1,678 @@
+{
+	"info": {
+		"_postman_id": "2385ec08-c07e-4e70-906f-294e2654b7af",
+		"name": "Recetas",
+		"description": "Recurso que representa una receta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18013353"
+	},
+	"item": [
+		{
+			"name": "Crear una recetas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"receta_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Focaccia\",\n    \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focaccia\",\n    \"videoPreparacion\": \"https://video.com/focaccia\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas"
+					]
+				},
+				"description": "Petición para agregar una receta al API"
+			},
+			"response": [
+				{
+					"name": "Crear una receta",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Focaccia\",\n    \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focaccia\",\n    \"videoPreparacion\": \"https://video.com/focaccia\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Focaccia\",\n    \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focaccia\",\n    \"videoPreparacion\": \"https://video.com/focaccia\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\",\n    \"id\": \"eae89db8-ccff-4fd1-9e66-3c6053a4b8cf\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener recetas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of recetas > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/recetas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas"
+					]
+				},
+				"description": "Petición para obtener las recetas del API"
+			},
+			"response": [
+				{
+					"name": "Obtener recetas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/recetas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"28a6bcd5-7f74-4d31-ac70-456d0c520544\",\n        \"nombre\": \"Focaccia\",\n        \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n        \"fotoPlato\": \"https://fotos.com/focaccia\",\n        \"videoPreparacion\": \"https://video.com/focaccia\",\n        \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Petición para obtener una receta del API"
+			},
+			"response": [
+				{
+					"name": "Obtener una receta",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{receta_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{receta_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"28a6bcd5-7f74-4d31-ac70-456d0c520544\",\n    \"nombre\": \"Focaccia\",\n    \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focaccia\",\n    \"videoPreparacion\": \"https://video.com/focaccia\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una receta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{receta_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{receta_invalida_id}}"
+					]
+				},
+				"description": "Petición para obtener una receta del API"
+			},
+			"response": [
+				{
+					"name": "Obtener una receta que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{receta_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{receta_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Modificar una Receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Focaccia2\",\n    \"descripcion\": \"La focaccia2 es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focacci2a\",\n    \"videoPreparacion\": \"https://video.com/focaccia2\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Petición para actualizar una receta del API"
+			},
+			"response": [
+				{
+					"name": "Modificar una receta",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Focaccia2\",\n    \"descripcion\": \"La focaccia2 es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focacci2a\",\n    \"videoPreparacion\": \"https://video.com/focaccia2\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{receta_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{receta_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"eae89db8-ccff-4fd1-9e66-3c6053a4b8cf\",\n    \"nombre\": \"Focaccia2\",\n    \"descripcion\": \"La focaccia2 es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focacci2a\",\n    \"videoPreparacion\": \"https://video.com/focaccia2\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Modificar una receta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Focaccia2\",\n    \"descripcion\": \"La focaccia2 es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focacci2a\",\n    \"videoPreparacion\": \"https://video.com/focaccia2\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{receta_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{receta_invalida_id}}"
+					]
+				},
+				"description": "Petición para actualizar una receta del API"
+			},
+			"response": [
+				{
+					"name": "Modificar una receta que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Focaccia2\",\n    \"descripcion\": \"La focaccia2 es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n    \"fotoPlato\": \"https://fotos.com/focacci2a\",\n    \"videoPreparacion\": \"https://video.com/focaccia2\",\n    \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{receta_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{receta_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{receta_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{receta_id}}"
+					]
+				},
+				"description": "Petición para eliminar una receta del API"
+			},
+			"response": [
+				{
+					"name": "Eliminar Receta",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{receta_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{receta_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar receta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La receta con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/recetas/{{receta_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"recetas",
+						"{{receta_invalida_id}}"
+					]
+				},
+				"description": "Petición para eliminar una receta del API"
+			},
+			"response": [
+				{
+					"name": "Eliminar receta que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tipoProducto\": \"Ingrediente\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/recetas/{{receta_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"recetas",
+								"{{receta_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La receta con el id dado no fue encontrada\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "receta_invalida_id",
+			"value": "aaaaaaaa-5c6c-4dcd-8c6e-eeeeeeeeeeee"
+		}
+	]
+}

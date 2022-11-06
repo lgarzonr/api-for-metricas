@@ -1,0 +1,1239 @@
+{
+	"info": {
+		"_postman_id": "a5845527-8a51-4c98-b89e-1d98eff80e9f",
+		"name": "Culturas-restaurante",
+		"description": "Representa la asociación entre cultura y restaurante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "531361"
+	},
+	"item": [
+		{
+			"name": "Agregar un restaurante a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_id}}"
+					]
+				},
+				"description": "Petición para agregar un restaurante a una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar un restaurante a una cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"ac58130a-fd67-4a2b-9bc3-e782d41d7d00\",\n    \"nombre\": \"Italiana\",\n    \"descripcion\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n    \"restaurantes\": [\n        {\n            \"id\": \"e34f9399-9b54-416d-a509-c9251d27f6d2\",\n            \"nombre\": \"mi restaurante\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar un restaurante a una cultura no valida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes/{{restaurante_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"restaurantes",
+						"{{restaurante_id}}"
+					]
+				},
+				"description": "Petición para agregar un restaurante a una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar un restaurante a una cultura no valida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar un restaurante no valido a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El restaurante con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_invalida_id}}"
+					]
+				},
+				"description": "Petición para agregar un restaurante a una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar un restaurante no valido a una cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes",
+								"{{restaurante_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El restaurante con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener Todos los Restaurantes de cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes"
+					]
+				},
+				"description": "Petición para obtener todos los restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener todos los restaurantes de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cultura/{{cultura_id}}/restaurante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cultura",
+								"{{cultura_id}}",
+								"restaurante"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"bc47d380-00e5-4dfa-aaac-e51ea2afb501\",\n        \"nombre\": \"Chefsito\"\n    },\n    {\n        \"id\":\"786a4f02-b926-4934-9784-05a7dbb1698c\",\n        \"nombre\": \"Osteria il Ciottolo\" \n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los restaurante de una cultura no valida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"restaurantes"
+					]
+				},
+				"description": "Petición para obtener todos los restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener todos los restaurante de una cultura no valida",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cultura/00000000-0000-0000-0000-000000000000/restaurante",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cultura",
+								"00000000-0000-0000-0000-000000000000",
+								"restaurante"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un restaurante de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_id}}"
+					]
+				},
+				"description": "Petición para obtener un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener un restaurante de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": \"e34f9399-9b54-416d-a509-c9251d27f6d2\",\n    \"nombre\": \"mi restaurante\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un restaurante de una cultura no valida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes/{{restaurante_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"restaurantes",
+						"{{restaurante_id}}"
+					]
+				},
+				"description": "Petición para obtener un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener un restaurante de una cultura no valida",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener  un restaurante no valido de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El restaurante con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_invalida_id}}"
+					]
+				},
+				"description": "Petición para obtener un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener  un restaurante no valido de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes",
+								"{{restaurante_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El restaurante con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un restaurante no asociado a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El restaurante con el id dado no esta asociada a la cultura\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id3}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_id3}}"
+					]
+				},
+				"description": "Petición para obtener un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener un restaurante no asociado a una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id3}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes",
+								"{{restaurante_id3}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El restaurante con el id dado no esta asociada a la cultura\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar todos los restaurentes de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n[\n    {\n        \"id\": \"{{restaurante_id}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes"
+					]
+				},
+				"description": "Petición para actualizar los restaurantes de una cultura"
+			},
+			"response": [
+				{
+					"name": "Actualizar todos los restaurentes de una cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{restaurante_id}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n  \"id\": {{cultura_id}},\n  \"nombre\": \"Italiana\",\n  \"descripción\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n  \"restaurantes\": [\n    {\n      \"id\": \"86d2006b-6f33-427d-9151-0f99443b9baa\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un restaurante con cultura no valida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n[\n    {\n        \"id\": \"{{restaurante_id}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"restaurantes"
+					]
+				},
+				"description": "Petición para actualizar los restaurantes de una cultura"
+			},
+			"response": [
+				{
+					"name": "Actualizar un restaurante no valido de una cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n[\n    {\n        \"id\": \"{{restaurante_id}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"restaurantes"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un cultura con un restaurante no valido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El restaurante con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"{{restaurante_invalida_id}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes"
+					]
+				},
+				"description": "Petición para actualizar los restaurantes de una cultura"
+			},
+			"response": [
+				{
+					"name": "Actualizar un restaurante con una cultura no valida",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"{{restaurante_invalida_id}}\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\" : 404,\n    \"message\" : \"El restaurante con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un restaurante de una receta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_id}}"
+					]
+				},
+				"description": "Petición para eliminar un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Eliminar un restaurante de una receta",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Eliminar un restaurante de una cultura no valida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes/{{restaurante_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}",
+						"restaurantes",
+						"{{restaurante_id}}"
+					]
+				},
+				"description": "Petición para eliminar un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Eliminar un restaurante de una cultura no valida",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un restaurante no valido de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El restaurante con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_invalida_id}}"
+					]
+				},
+				"description": "Petición para eliminar un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Eliminar un restaurante no valido de una cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"restaurantes",
+								"{{restaurante_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El restaurante con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un restaurante no asociado a una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El restaurante con el id dado no esta asociada a la cultura\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/restaurantes/{{restaurante_id3}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"restaurantes",
+						"{{restaurante_id3}}"
+					]
+				},
+				"description": "Petición para eliminar un restaurante de una cultura"
+			},
+			"response": [
+				{
+					"name": "Eliminar un restaurante no asociado a una cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cultura/{{cultura_id}}/restaurante/{{restaurante_id3}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cultura",
+								"{{cultura_id}}",
+								"restaurante",
+								"{{restaurante_id3}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El restaurante con el id dado no esta asociada a la cultura\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "cultura_invalida_id",
+			"value": "aaaaaaaa-5c6c-4dcd-8c6e-eeeeeeeeeeee",
+			"type": "string"
+		},
+		{
+			"key": "restaurante_invalida_id",
+			"value": "aaaaaaaa-5c6c-4dcd-8c6e-eeeeeeeeeeee",
+			"type": "string"
+		},
+		{
+			"key": "restaurante_2",
+			"value": "679137ed-1a79-4703-8bcc-06ff6fc2dad6",
+			"type": "string"
+		},
+		{
+			"key": "restaurante_id3",
+			"value": "e34f9399-9b54-416d-a509-c9251d27f6d2",
+			"type": "string"
+		},
+		{
+			"key": "restaurante_id",
+			"value": "4dae95d6-bf6a-40cf-b71f-a581ec2f5727",
+			"type": "string"
+		}
+	]
+}

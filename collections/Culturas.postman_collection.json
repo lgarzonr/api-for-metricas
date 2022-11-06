@@ -1,0 +1,642 @@
+{
+	"info": {
+		"_postman_id": "70d90565-5d0e-4657-ac52-449806e8919e",
+		"name": "Culturas",
+		"description": "Recurso que representa una cultura gastronomica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18013353"
+	},
+	"item": [
+		{
+			"name": "Agregar Cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"cultura_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Italiana\",\n    \"descripcion\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas"
+					]
+				},
+				"description": "Solicitud para agregar una cultura gastronómica al API"
+			},
+			"response": [
+				{
+					"name": "Agregar Cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Italiana\",\n    \"descripcion\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/culturas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"culturas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\" : {{cultura_id}},\n    \"nombre\": \"Italiana\",\n    \"descripcion\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar Cultura sin nombre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"descripcion\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas"
+					]
+				},
+				"description": "Solicitud para agregar una cultura gastronómica al API"
+			},
+			"response": [
+				{
+					"name": "Agregar Cultura sin nombre",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/culturas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"culturas"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": \"La cultura no puede ir sin un nombre, campo obligatorio\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener culturas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of cultures > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas"
+					]
+				},
+				"description": "Solicitud para obtener las culturas gastronómicas del API"
+			},
+			"response": [
+				{
+					"name": "Obtener culturas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/culturas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"culturas"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 11111,\n        \"nombre\": \"Italiana\",\n        \"descripcion\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n        \"recetas\" : [\n            {\n            \"id\": \"28a6bcd5-7f74-4d31-ac70-456d0c520544\",\n            \"nombre\": \"Focaccia\",\n            \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n            \"fotoPlato\": \"https://fotos.com/focaccia\",\n            \"videoPreparacion\": \"https://video.com/focaccia\",\n            \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n            }\n\n        ],\n        \"productos\" : [\n            {\n                \"id\" : {{producto_id}},\n                \"nombre\": \"Ingrediente prueba\",\n                \"tipoProducto\": \"Ingrediente\",\n                \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n                \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n            }\n        ],\n        \"paises\" : [\n            {\n                \"id\":\"1\",\n                \"nombre\":\"España\", \n                \"codigoPais\": \"ES\", \n                \"descripcion\": \"España es un país soberano transcontinental, miembro de la Unión Europea, constituido en Estado social y democrático     de  derecho y cuya forma de gobierno es la monarquía parlamentaria. Su territorio, con capital en Madrid,30​ está organizado en diecisiete comunidades autónomas, formadas a su vez por cincuenta provincias; y dos ciudades autónomas.\"\n            }\n\n        ],\n        \"restaurantes\" : [\n            {\n                \"id\": \"86d2006b-6f33-427d-9151-0f99443b9baa\",\n                \"nombre\": \"Chefsito\",\n                \"ciudad\": {\n                    \"codigo\": \"12345\",\n                    \"nombre\": \"Napoles\"\n                }\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}"
+					]
+				},
+				"description": "Solicitud para obtener una cultura gastronómica del API"
+			},
+			"response": [
+				{
+					"name": "Obtener cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": {{cultura_id}},\n    \"nombre\": \"Italiana\",\n    \"descripción\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n    \"recetas\" : [\n        {\n        \"id\": \"28a6bcd5-7f74-4d31-ac70-456d0c520544\",\n        \"nombre\": \"Focaccia\",\n        \"descripcion\": \"La focaccia es un pan plano tradicional italiano, que podemos tomar tal cual tal cual o abierta por la mitad y rellena como un bocadillo. De cualquiera de estas dos maneras, resulta deliciosa ya que es una masa aireada y poco pesada.\",\n        \"fotoPlato\": \"https://fotos.com/focaccia\",\n        \"videoPreparacion\": \"https://video.com/focaccia\",\n        \"preparacion\": \"En un bol, ponemos 225 gramos de agua, 4 gramos de levadura seca de panadero, 5 gramos de sal, 5 gramos de azúcar blanco y 30 gramos de aceite de oliva. Mezclamos bien y dejamos reposar 5 minutos para que la levadura se vaya hidratando. En otro bol —si vamos a amasar la focaccia en una amasadora, podemos usar el de esta— ponemos 175 gramos de harina de trigo y 170 gramos de harina de fuerza. Agregamos la mezcla anterior de la levadura y amasamos durante 15 minutos, a mano o con una amasadora.\"\n        }\n\n    ],\n    \"productos\" : [\n        {\n            \"id\" : {{producto_id}},\n            \"nombre\": \"Ingrediente prueba\",\n            \"tipoProducto\": \"Ingrediente\",\n            \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n            \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n        }\n    ],\n    \"paises\" : [\n        {\n            \"id\":\"1\",\n            \"nombre\":\"España\", \n            \"codigoPais\": \"ES\", \n            \"descripcion\": \"España es un país soberano transcontinental, miembro de la Unión Europea, constituido en Estado social y democrático     de  derecho y cuya forma de gobierno es la monarquía parlamentaria. Su territorio, con capital en Madrid,30​ está organizado en diecisiete comunidades autónomas, formadas a su vez por cincuenta provincias; y dos ciudades autónomas.\"\n        }\n\n    ],\n    \"restaurantes\" : [\n        {\n            \"id\": \"86d2006b-6f33-427d-9151-0f99443b9baa\",\n            \"nombre\": \"Chefsito\",\n            \"ciudad\": {\n                \"codigo\": \"12345\",\n                \"nombre\": \"Napoles\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}"
+					]
+				},
+				"description": "Solicitud para obtener una cultura gastronómica del API"
+			},
+			"response": [
+				{
+					"name": "Obtener cultura que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar Cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Italiana_nuevo\",\n    \"descripcion\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}"
+					]
+				},
+				"description": "Solicitud para actualizar una cultura gastronómica al API"
+			},
+			"response": [
+				{
+					"name": "Actualizar Cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Italiana_nuevo\",\n    \"descripcion\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Italiana_nuevo\",\n    \"descripcion\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar Cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Italiana_nuevo\",\n    \"descripcion\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}"
+					]
+				},
+				"description": "Solicitud para actualizar una cultura gastronómica al API"
+			},
+			"response": [
+				{
+					"name": "Actualizar Cultura que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Italiana_nuevo\",\n    \"descripcion\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar Cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}"
+					]
+				},
+				"description": "Solicitud para eliminar una cultura gastronómica al API"
+			},
+			"response": [
+				{
+					"name": "Eliminar Cultura",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar Cultura que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"La cultura con el id dado no fue encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_invalida_id}}"
+					]
+				},
+				"description": "Solicitud para eliminar una cultura gastronómica al API"
+			},
+			"response": [
+				{
+					"name": "Eliminar Cultura que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_invalida_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_invalida_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró una cultura con el id {{cultura_id}}\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "cultura_invalida_id",
+			"value": "aaaaaaaa-5c6c-4dcd-8c6e-eeeeeeeeeeee"
+		}
+	]
+}

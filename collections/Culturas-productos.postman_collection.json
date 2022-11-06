@@ -1,0 +1,1154 @@
+{
+	"info": {
+		"_postman_id": "97a3adbe-69e0-4642-96b0-7a0f8f3bbd51",
+		"name": "Culturas-productos",
+		"description": "Representa la asociación entre cultura y productos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1589290"
+	},
+	"item": [
+		{
+			"name": "Agregar Producto a una Cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para agregar un producto la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar Producto a una Cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": {{cultura_id}},\n    \"nombre\": \"Italiana\",\n    \"descripción\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n    \"recetas\" : [],\n    \"productos\": [\n        {\n            \"id\" : {{producto_id}},\n            \"nombre\": \"Ingrediente prueba\",\n            \"tipo_producto\": \"Ingrediente\",\n            \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n            \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar Producto a una Cultura -- cultura no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"cultura no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_not_exists}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_not_exists}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para agregar un producto la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar Producto a una Cultura -- cultura no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\" : 404,\n    \"message\":\"No se encuentra cultura con ese id\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar Producto a una Cultura - Producto no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Producto no encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id}}"
+					]
+				},
+				"description": "Petición para agregar un producto la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar Producto a una Cultura -- producto not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró el producto\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Agregar Producto a una Cultura-- Producto duplicado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El producto existe en la cultura\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para agregar un producto la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar Producto a una Cultura -- producto duplicado",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\" : 412,\n    \"message\":\"El producto ya se encuentra registrado en la cultura\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener Productos de cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						""
+					]
+				},
+				"description": "Petición para obtener la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener Productos de cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								""
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\" : {{producto_id}},\n        \"nombre\": \"Ingrediente prueba\",\n        \"tipo_producto\": \"Ingrediente\",\n        \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n        \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n    },\n        {\n        \"id\" : 2222,\n        \"nombre\": \"Ingrediente 2\",\n        \"tipo_producto\": \"Ingrediente\",\n        \"descripcion\": \"un ingrediente de acompañamiento en los platos para update lista productos\",\n        \"historia\": \"es un ingrediente creado en test desde el año test2222\"\n    }\n]\n"
+				}
+			]
+		},
+		{
+			"name": "Obtener Productos de cultura Cultura no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_not_exists}}/productos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_not_exists}}",
+						"productos"
+					]
+				},
+				"description": "Petición para obtener la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por ID de una cultura - cultura no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un producto por ID de una cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para obtener un producto de la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por ID de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\" : {{producto_id}},\n    \"nombre\": \"Ingrediente prueba\",\n    \"tipo_producto\": \"Ingrediente\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un producto por ID de una cultura - no existe cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"cultura no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_not_exists}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_not_exists}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para obtener un producto de la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por ID de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La cultura con el id dado no fue encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un producto por ID de una cultura - no existe producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Producto no encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id}}"
+					]
+				},
+				"description": "Petición para obtener un producto de la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Obtener un producto por ID de una cultura",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró el producto\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar la Lista de Productos de Cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\" : \"{{producto_id_rel}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						""
+					]
+				},
+				"description": "Petición para actualizar la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Actualizar la Lista de Productos de Cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\" : 2222\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								""
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": {{cultura_id}},\n    \"nombre\": \"Italiana\",\n    \"descripción\": \"Si tratamos de imaginarnos la cultura gastronímica italiana, la mayoría de la gente va a pensar en pasta o pizza, espagueti o salchichas. Pero como la mayoría de las tierras antiguas y con una larga historia, Italia tiene una cocina muy variada. Las variaciones regionales no se aprecian en ninguna parte de una forma tan brusca como la diferencia que existe entre la cocina del norte y la cocina del sur de Italia.\",\n    \"recetas\" : [],\n    \"productos\": [\n        {\n            \"id\" : {{producto_id}},\n            \"nombre\": \"Ingrediente prueba\",\n            \"tipo_producto\": \"Ingrediente\",\n            \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n            \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n        },\n         {\n            \"id\" : 2222,\n            \"nombre\": \"Ingrediente 2\",\n            \"tipo_producto\": \"Ingrediente\",\n            \"descripcion\": \"un ingrediente de acompañamiento en los platos para update lista productos\",\n            \"historia\": \"es un ingrediente creado en test desde el año test2222\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar la Lista de Productos de Cultura - No existe producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Producto no encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\" : \"{{producto_id}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						""
+					]
+				},
+				"description": "Petición para actualizar la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Actualizar la Lista de Productos de Cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\" : 2222\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								""
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró el producto con id {{producto_id_2}}\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar la Lista de Productos de Cultura - no existe Cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"cultura no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\" : 2222\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_not_exists}}/productos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_not_exists}}",
+						"productos"
+					]
+				},
+				"description": "Petición para actualizar la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Actualizar la Lista de Productos de Cultura",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\" : 2222\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								""
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\" : 404,\n    \"message\":\"No se encuentra cultura con id {{cultura_id}}\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar la Lista de Productos de Cultura - producto ya existe en relación",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\" : \"{{producto_id_rel}}\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos"
+					]
+				},
+				"description": "Petición para actualizar la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar Producto a una Cultura -- producto duplicado Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\" : 412,\n    \"message\":\"El producto ya se encuentra registrado en la cultura\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para eliminar un prodcuto de la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Delete producto",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete producto - No existe Cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"cultura no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_not_exists}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_not_exists}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para eliminar un prodcuto de la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar Producto a una Cultura -- cultura not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/00000-00000-00000/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"00000-00000-00000",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    {\n    \"statusCode\" : 404,\n    \"message\":\"No se encuentra cultura con ese id\"\n}\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete producto - no existe producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Producto no encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id}}"
+					]
+				},
+				"description": "Petición para eliminar un prodcuto de la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Agregar Producto a una Cultura -- producto not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/0000-00000-0000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"0000-00000-0000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró el producto en la cultura\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete producto- no asociado a cultura",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"   pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"El producto no existe en la cultura\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/culturas/{{cultura_id}}/productos/{{producto_id_rel}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"culturas",
+						"{{cultura_id}}",
+						"productos",
+						"{{producto_id_rel}}"
+					]
+				},
+				"description": "Petición para eliminar un prodcuto de la lista de productos de una cultura"
+			},
+			"response": [
+				{
+					"name": "Delete producto",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/culturas/{{cultura_id}}/producto/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"culturas",
+								"{{cultura_id}}",
+								"producto",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\" : \"Producto {{producto_id}} no está asociado a la cultura\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "producto_id",
+			"value": "c752f0fb-683b-40a2-9d7e-e366eedb54b6"
+		}
+	]
+}

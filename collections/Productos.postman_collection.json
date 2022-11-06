@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "72dbd6e3-0a90-4823-9ed8-62b11355e2da",
+		"name": "Productos",
+		"description": "Colección para la gestión y consulta de productos del sistema",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1589290"
+	},
+	"item": [
+		{
+			"name": "Agregar producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"producto_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Ingrediente prueba\",\n    \"tipoProducto\": \"Ingrediente\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/productos/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						""
+					]
+				},
+				"description": "Permite agregar un nuevo producto al sistema"
+			},
+			"response": [
+				{
+					"name": "Agregar producto a una Cultura",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Ingrediente prueba\",\n    \"tipo_producto\": \"Ingrediente\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/productos/{{cultura}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos",
+								"{{cultura}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": {{id_producto}},\n    \"nombre\": \"Ingrediente prueba\",\n    \"tipo_producto\": \"Ingrediente\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un Producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}"
+					]
+				},
+				"description": "Permite recuperar un producto asociado al sistema a partir de su id"
+			},
+			"response": [
+				{
+					"name": "Obtener producto - 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/productos/{{id_producto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos",
+								"{{id_producto}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Ingrediente prueba\",\n    \"tipo_producto\": \"Ingrediente\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un Producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Producto no encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{Id_Producto_no_Exists}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{Id_Producto_no_Exists}}"
+					]
+				},
+				"description": "Permite recuperar un producto asociado al sistema a partir de su id"
+			},
+			"response": [
+				{
+					"name": "Producto no encontrado",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/productos/{{id_producto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos",
+								"{{id_producto}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El producto consultado no está asociado a la cultura\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos productos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of products > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos"
+					]
+				},
+				"description": "Permite recuperar la lista de todos los productos existentes en el sistema"
+			},
+			"response": [
+				{
+					"name": "Obtener todos productos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/productos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"nombre\": \"Ingrediente prueba\",\n        \"tipo_producto\": \"Condimento\",\n        \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n        \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Modificar un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Ingrediente update\",\n    \"tipoProducto\": \"Ingrediente\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}"
+					]
+				},
+				"description": "Permite modificar la información correspondiente de un producto a partir del ID"
+			},
+			"response": [
+				{
+					"name": "Modificar un producto",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tipoProducto\": \"Condimento\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/productos/{{id_producto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos",
+								"{{id_producto}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Ingrediente prueba\",\n    \"tipo_producto\": \"Condimento\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Modificar un producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Producto no encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Ingrediente update\",\n    \"tipoProducto\": \"Ingrediente\",\n    \"descripcion\": \"un ingrediente de acompañamiento en los platos\",\n    \"historia\": \"es un ingrediente creado en test desde el año testxxxx\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{Id_Producto_no_Exists}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{Id_Producto_no_Exists}}"
+					]
+				},
+				"description": "Permite modificar la información correspondiente de un producto a partir del ID"
+			},
+			"response": [
+				{
+					"name": "Modificar un producto -- not found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tipoProducto\": \"Ingrediente\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/productos/{{id_producto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos",
+								"{{id_producto}}"
+							]
+						}
+					},
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró el producto\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar Producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}"
+					]
+				},
+				"description": "Permite eliminar un producto del sistema a partir del id"
+			},
+			"response": [
+				{
+					"name": "Eliminar Producto",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/productos/{{id_producto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos",
+								"{{id_producto}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar Producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Producto no encontrado\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productos/{{producto_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productos",
+						"{{producto_id}}"
+					]
+				},
+				"description": "Permite eliminar un producto del sistema a partir del id"
+			},
+			"response": [
+				{
+					"name": "Eliminar un producto -- not found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tipoProducto\": \"Ingrediente\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/productos/{{id_producto}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"productos",
+								"{{id_producto}}"
+							]
+						}
+					},
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se puede eliminar el producto, no se encontró el producto con el id\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "cultura",
+			"value": "12345",
+			"type": "string"
+		},
+		{
+			"key": "id_producto",
+			"value": "c752f0fb-683b-40a2-9d7e-e366eedb54b6",
+			"type": "string"
+		},
+		{
+			"key": "Id_Producto_no_Exists",
+			"value": "9499ec11-5a97-41a0-8f7a-674730a5bd0c",
+			"type": "string"
+		},
+		{
+			"key": "id_Producto_eliminar",
+			"value": "2bb0d778-5fbf-4d86-9a59-d5cc32589852",
+			"type": "string"
+		}
+	]
+}
